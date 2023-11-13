@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 music=pygame.mixer.music.load('C:\\Users\\Reaper\Music\\audio2.wav')
 score_sound =pygame.mixer.Sound('C:\\Users\Reaper\\Music\\audio1.wav')
 lompat_sound=pygame.mixer.Sound('C:\\Users\\Reaper\\Music\\audio3.wav')
-logo = pygame.image.load("C:\\Users\\Reaper\Documents\\ASET GAME DEVPY\\Aset Objek\\logo game.png")
+
 # Function untuk gambar
 def draw_floor():
     screen.blit(floor_img, (floor_x, 520))
