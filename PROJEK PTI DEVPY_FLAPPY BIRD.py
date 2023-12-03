@@ -42,7 +42,7 @@ def pipe_animation():
         if pipe.right < 0:
             pipes.remove(pipe)
 
-        if bird_rect.colliderect(pipe):
+        if burung1_rect.colliderect(pipe):
             game_over = True
 # Game window
 width, height = 350, 622
@@ -51,25 +51,25 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Flappy Bird")
 
 # Pengaturan background dan base image
-back_img = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\background.png")
-floor_img = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\Tanah.png")
+back_img = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\background.png")
+floor_img = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\Tanah.png")
 floor_x = 0
 
 # different stages of bird
-bird_up = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\B.png")
-bird_down = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\B1.png")
-bird_mid = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\B2.png")
-birds = [bird_up, bird_mid, bird_down]
-bird_index = 0
-bird_flap = pygame.USEREVENT
-pygame.time.set_timer(bird_flap, 200)
-bird_img = birds[bird_index]
-bird_rect = bird_img.get_rect(center=(56, 618 // 2))
-bird_movement = 0
+burung1_up = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\B.png")
+burung1_down = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\B1.png")
+burung1_mid = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\B2.png")
+burung = [burung1_up, burung1_mid, burung1_down]
+burung1_index = 0
+burung1_flap = pygame.USEREVENT
+pygame.time.set_timer(burung1_flap, 200)
+burung1_img = burung[burung1_index]
+burung1_rect = burung1_img.get_rect(center=(56, 618 // 2))
+burung1_movement = 0
 gravity = 0.16
 
 # Memuat gambar pipa
-pipe_img = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\Kayu.png")
+pipe_img = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\Kayu.png")
 pipe_height = [400, 350, 533, 490]
 
 # Untuk memunculkan pipa
@@ -79,7 +79,7 @@ pygame.time.set_timer(create_pipe, 1100)
 
 # Menampilkan gambar game over
 game_over = False
-over_img = pygame.image.load("C:\\Users\\Reaper\\Documents\\ASET GAME DEVPY\\Aset Objek\\front.png").convert_alpha ()
+over_img = pygame.image.load("C:\Flappy bird\\ASET GAME DEVPY\\Aset Objek\\front.png").convert_alpha ()
 over_rect = over_img.get_rect(center=(width // 2, height // 2))
 
 # Atur variabel dan font skor
@@ -88,7 +88,7 @@ high_score = 0
 score_time = True
 score_font = pygame.font.Font("freesansbold.ttf", 27)
 
-# Function untuk draw score
+# Fungsi untuk mencetak skor
 def draw_score(game_state):
     if game_state == "game_on":
         pygame.mixer.music.play(-1)
@@ -105,7 +105,7 @@ def draw_score(game_state):
         high_score_rect = high_score_text.get_rect(center=(width // 2, 506))
         screen.blit(high_score_text, high_score_rect)
 
-# Function untuk mengupdate score
+# fungsi untuk mengupdate skor
 def score_update():
     global score, score_time, high_score
     if pipes:
@@ -133,25 +133,25 @@ while running:
         if event.type == pygame.KEYDOWN:  # Keyword 
             if event.key == pygame.K_SPACE and not game_over:  # If backspace adalah keyword
                 lompat_sound.play()
-                bird_movement = 0
-                bird_movement = -7
+                burung1_movement = 0
+                burung1_movement = -7
 
             if event.key == pygame.K_SPACE and game_over:
                 game_over = False
                 pipes = []
-                bird_movement = 0
-                bird_rect = bird_img.get_rect(center=(67, 600 // 2))
+                burung1_movement = 0
+                burung1_rect = burung1_img.get_rect(center=(67, 600 // 2))
                 score_time = True
                 score = 0
 
         # Membuat tahapan yang berbeda
-        if event.type == bird_flap:
-            bird_index += 1
-            if bird_index > 2:
-                bird_index = 0
+        if event.type == burung1_flap:
+            burung1_index += 1
+            if burung1_index > 2:
+                burung1_index = 0
 
-            bird_img = birds[bird_index]
-            bird_rect = bird_up.get_rect(center=bird_rect.center)
+            burung1_img = burung[burung1_index]
+            burung1_rect = burung1_up.get_rect(center=burung1_rect.center)
         # Menambahkan pipa dalam daftar
         if event.type == create_pipe:
             pipes.extend(create_pipes())
@@ -160,12 +160,12 @@ while running:
 
     # Game over
     if not game_over:
-        bird_movement += gravity
-        bird_rect.centery += bird_movement
-        rotated_bird = pygame.transform.rotozoom(bird_img, bird_movement * -6, 1)
-        if bird_rect.top < 5 or bird_rect.bottom >= 550:
+        burung1_movement += gravity
+        burung1_rect.centery += burung1_movement
+        rotated_burung1 = pygame.transform.rotozoom(burung1_img, burung1_movement * -6, 1)
+        if burung1_rect.top < 5 or burung1_rect.bottom >= 550:
             game_over = True
-        screen.blit(rotated_bird, bird_rect)
+        screen.blit(rotated_burung1, burung1_rect)
         pipe_animation()
         score_update()
         draw_score("game_on")
